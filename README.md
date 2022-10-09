@@ -17,7 +17,7 @@ Some *possible* additional features:
 
 ## User Stories:
 
-- As a user, I want to be able to add a new ship shape to the existing ships
+- As a user, I want to be able to add a new ship to the game 
 - As a user, I want to be able to choose which coordinate to scout
 - As a user, I want to be able to know the result of scouting a coordinate
 - As a user, I want to be able to keep track of how many enemy ships remain

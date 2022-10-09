@@ -1,29 +1,51 @@
 package model;
 
 public class Ship {
-    private int width;
-    private int sqHit;
-    private int sqRemain;
-    private boolean isAlive;
-    private int posX;
-    private int posY;
+    private int size;
+    private int[] coords;
+    private int hits;
 
 
-    //EFFECTS: create Ship with width w at coordinates x, y
-    public Ship(int w, int x, int y) { // test to ensure sqHit+sqRemain always = width
-        this.width = w;
-        this.sqHit = 0;
-        this.sqRemain = w;
-        this.isAlive = true;
-        this.posX = x;
-        this.posY = y;
+    //EFFECTS: create Ship with width w at coordinates x (main coordinate)
+    public Ship(int s, int x, int y, int orientation) { // test to ensure sqHit+sqRemain always = width
+        size = s;
 
-        //checkIsAlive();
+        // this will flatten the arrays?
+        int linearized = (y * 8) + x;
+        coords = new int[s];
+
+        //True = horizontal
+        if (orientation == 1) {
+            for (int i = 0; i < coords.length; i++) {
+                coords[i] = linearized + i; //
+            }
+        } else if (orientation == 0) {
+            for (int i = 0; i < coords.length; i++) {
+                coords[i] = linearized + (i * 8);
+            }
+        }
+
     }
 
-    public void checkIsAlive() { // this should be called in the turn system
-        if (sqHit == this.width) {
-            isAlive = false;
+    //EFFECTS: Checks to see if a ship is hit
+    public boolean isHit(int x, int y) {
+        int linearized = (y * 8) + x; // 8 represents the board size
+
+        for (int i = 0; i < coords.length; i++) {
+            if (linearized == coords[i]) {
+                hits++;
+                return true;
+            }
         }
+
+        return false;
+    }
+
+    //EFFECTS: Checks to see if the ship has been sunk
+    public boolean isSunk() {
+        if (hits == size) {
+            return true;
+        }
+        return false;
     }
 }

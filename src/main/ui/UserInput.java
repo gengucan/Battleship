@@ -5,9 +5,11 @@ import java.util.Scanner;
 public class UserInput {
     Scanner user = new Scanner(System.in);
 
+    //EFFECTS: Creates a UserInput object that allows us to access the methods in UserInput
     public UserInput() {
     }
 
+    //EFFECTS: Checks if given coord is within the boundaries
     public int userInputCoord() {
         int coord;
         while (true) {
@@ -19,7 +21,8 @@ public class UserInput {
         }
     }
 
-    public int userInputSize() { //  parsedPlayerChoiceX + parsedPlayerChoiceSize > 8
+    //EFFECTS: Checks if given size is not bigger than the length/width of the board
+    public int userInputSize() {
         int size;
         while (true) {
 
@@ -32,6 +35,7 @@ public class UserInput {
         }
     }
 
+    //EFFECTS: Checks if given dir is either 0 or 1
     public int userInputDir() {
         int dir;
         while (true) {

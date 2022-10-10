@@ -26,6 +26,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
         System.out.println();
     }
 
+    //EFFECTS: Prompts player 1 for their inputs and checks if they have won or not
     private static boolean runTurn1(Game g, UserInput u) {
         // Player 1 Turn
         System.out.println("Player 1 turn:");
@@ -48,6 +49,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
         return false;
     }
 
+    //EFFECTS: Prompts player 2 for their inputs and checks if they have won or not
     private static boolean runTurn2(Game g, UserInput u) {
         //Player 2 Turn
         System.out.println("Player 2 turn:");
@@ -68,6 +70,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
         return false;
     }
 
+    //EFFECTS: Prints the welcome message and instructions
     private static void startUp() {
         System.out.println();
         System.out.println("Welcome to Battleship!");
@@ -79,12 +82,14 @@ public class Main { // create a printBoard for setup with 1's showing to user
         System.out.println();
     }
 
-    private static void turnSetup(int p) {
+    //EFFECTS: Prints the setup message for each player's board
+    private static void shipSetup(int p) {
         System.out.println("PLAYER " + p + " Setup:");
         System.out.println();
         System.out.println("How many ships would you like between 1-3?");
     }
 
+    //EFFECTS: Sets up each ship for each player and runs the game until a winner is found
     public static void main(String[] args) {
         Game game1 = new Game();
 
@@ -93,7 +98,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
         // Start up
         startUp();
 
-        turnSetup(1);
+        shipSetup(1);
 
         int shipCount = userInput.userInputShipCount();
         int counter = 0;
@@ -118,7 +123,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
             }
         }
 
-        turnSetup(2);
+        shipSetup(2);
 
         shipCount = userInput.userInputShipCount();
         counter = 0;

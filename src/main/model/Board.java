@@ -25,7 +25,7 @@ public class Board {
         }
     }
 
-    //MODIFIES: boardArray, sunken
+    //MODIFIES: this
     //EFFECTS: Checks the scouted tile and changes it depending on if it was hit or missed;
     //         Returns true if all ships are sunk
     public boolean turn(int x, int y) {
@@ -57,7 +57,9 @@ public class Board {
         return false;
     }
 
-
+    //REQUIRES: dir is either 0 or 1; s is non-zero
+    //MODIFIES: this
+    //EFFECTS: Adds a ship of the given size, x coord, y coord, and direction to the 2D array and the ships array
     public boolean addShip(int s, int x, int y, int dir) {
         if (dir > 1) {
             for (int i = x; i < x + s; i++) {

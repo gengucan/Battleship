@@ -4,46 +4,42 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-/*
+
 public class BoardTest {
     public Board testBoard1 = new Board();
-    public Board testBoard2 = new Board();
-
-    public Ship testShip1;
-    public Ship testShip2;
-    public Ship testShip3;
-    public Ship testShip4;
-
-    @BeforeEach // need to give the Ships arr the board test ships
-    public void createTestShips() {
-
-
-        Ship testShip1 = new Ship(1, 0, 0, 0); // Ship of size 1 @ (0, 0)
-        Ship testShip2 = new Ship(8, 0, 0, 0); // Ship of size 8 @ (0, 0) -> (0, 7)
-        Ship testShip3 = new Ship(1, 0, 0, 0); // Ship of size 1 @ (0, 0)
-        Ship testShip4 = new Ship(1, 0, 0, 0); // Ship of size 1 @ (0, 0)
-
-        testBoard1.setShips(testShip1);
-        testBoard1.setShips(testShip2);
-        testBoard1.setShips(testShip3);
-        testBoard1.setShips(testShip4);
-
-        testBoard2.setShips(testShip1);
-    }
 
     @Test
-    public void shipCountLimitTest() {
+    public void boardTest() {
 
-        // should cause the loop to fail; how do we test this?
-        //assertEquals(4, testBoard1.getParsedPlayerChoiceShipCount());
-        //assertEquals(1, testBoard2.getParsedPlayerChoiceShipCount());
+        assertEquals(0, testBoard1.getShipsRemaining());
+        testBoard1.addShip(1, 0, 0, 0);
+        assertEquals(1, testBoard1.getShipsRemaining());
+
+//        testBoard1.addShip(1, 0, 0, 0);
+//        testBoard1.addShip(1, 0, 0, 0);
+//        testBoard1.addShip(1, 0, 0, 0);
 
     }
 
     @Test
-    public void validateShipTest() {
-
+    public void turnTestGameWon() {
+        //create ships then test the t/f
+        testBoard1.addShip(1, 0, 0, 0);
+        assertTrue(testBoard1.turn(0, 0));
     }
+
+    @Test
+    public void turnTestGameCont(){
+        testBoard1.addShip(1, 0, 0, 0);
+        assertFalse(testBoard1.turn(1,1));
+    }
+
+    @Test // testing to ensure the game board puts a ship in the correct spot on the array
+    public void addShipTest(){
+        testBoard1.addShip(1,0,0,0);
+        assertEquals(0,testBoard1.getBoardArray()); // change 0 to the actual 2d array
+    }
+
 }
 
 /*

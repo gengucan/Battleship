@@ -18,9 +18,4 @@ public class Game {
     public Board getBoard2() {
         return board2;
     }
-
-    //EFFECTS: Starts each player's turn and ends the game if either player runs out of ships
-    public void startGame() {
-
-    }
 }

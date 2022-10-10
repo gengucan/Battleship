@@ -5,7 +5,7 @@ public class Ship {
     private int[] coords;
     private int hits;
 
-
+    //MODIFIES: this
     //EFFECTS: create Ship with width w at coordinates x (main coordinate)
     public Ship(int s, int x, int y, int dir) { // test to ensure sqHit+sqRemain always = width
         size = s;
@@ -27,6 +27,7 @@ public class Ship {
 
     }
 
+    //MODIFIES: this
     //EFFECTS: Checks to see if a ship is hit
     public boolean isHit(int x, int y) {
         int linearized = (y * 8) + x; // 8 represents the board size
@@ -37,7 +38,6 @@ public class Ship {
                 return true;
             }
         }
-
         return false;
     }
 

@@ -7,7 +7,7 @@ public class Ship {
 
 
     //EFFECTS: create Ship with width w at coordinates x (main coordinate)
-    public Ship(int s, int x, int y, int orientation) { // test to ensure sqHit+sqRemain always = width
+    public Ship(int s, int x, int y, int dir) { // test to ensure sqHit+sqRemain always = width
         size = s;
 
         // this will flatten the arrays?
@@ -15,11 +15,11 @@ public class Ship {
         coords = new int[s];
 
         //True = horizontal
-        if (orientation == 1) {
+        if (dir == 1) {
             for (int i = 0; i < coords.length; i++) {
                 coords[i] = linearized + i; //
             }
-        } else if (orientation == 0) {
+        } else if (dir == 0) {
             for (int i = 0; i < coords.length; i++) {
                 coords[i] = linearized + (i * 8);
             }

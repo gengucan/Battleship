@@ -47,7 +47,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
 
         return false;
     }
-    
+
     private static boolean runTurn2(Game g, UserInput u) {
         //Player 2 Turn
         System.out.println("Player 2 turn:");

@@ -20,6 +20,22 @@ public class Main { // create a printBoard for setup with 1's showing to user
                 }
                 System.out.print("\t"); // prints the spacing
             }
+
+/*
+            ACTIVATE THIS LOOP FOR TESTING PURPOSES ONLY! - it shows where the ships are
+            for (int j = 0; j < 8; j++) {
+                if ((boardArray[i][j] == 0)) {
+                    System.out.print("?"); // this prints to board -> do we need ln?
+                } else if (boardArray[i][j] == 1) {
+                    System.out.print(")");
+                } else if (boardArray[i][j] == 2) {
+                    System.out.print("x");
+                } else if (boardArray[i][j] == 3) {
+                    System.out.print("!");
+                }
+                System.out.print("\t"); // prints the spacing
+            }
+*/
             System.out.println(); // creates new line after every 8 prints (to create an 8x8 board)
         }
         System.out.println("You have " + shipsRemaining + " ships left to find");

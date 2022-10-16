@@ -30,10 +30,10 @@ public class Board {
     //         Returns true if all ships are sunk
     public boolean turn(int x, int y) {
         // Check to see if tile has been checked + current state of the tile
-        if (boardArray[x][y] == 0) {
-            boardArray[x][y] = 2; // miss
-        } else if (boardArray[x][y] == 1) {
-            boardArray[x][y] = 3;
+        if (boardArray[y][x] == 0) {
+            boardArray[y][x] = 2; // miss
+        } else if (boardArray[y][x] == 1) { // flipped here
+            boardArray[y][x] = 3;
             boolean foundShip = false;
             int counter = 0;
 
@@ -47,7 +47,7 @@ public class Board {
             }
 
             // Checks if all the ships have been sunk
-            if (ships.get(--counter).isSunk()) { // use ships[--counter] for normal arr
+            if (ships.get(--counter).isSunk()) {
                 sunken++;
                 if (sunken == ships.size()) {
                     return true;
@@ -61,23 +61,23 @@ public class Board {
     //MODIFIES: this
     //EFFECTS: Adds a ship of the given size, x coord, y coord, and direction to the 2D array and the ships array
     public boolean addShip(int s, int x, int y, int dir) {
-        if (dir > 1) {
+        if (dir == 1) { // horizontal
             for (int i = x; i < x + s; i++) {
-                if (boardArray[i][y] != 0) {
+                if (boardArray[y][i] != 0) {
                     return false;
                 }
             }
             for (int j = x; j < (x + s); j++) {
-                boardArray[x][y] = 1;
+                boardArray[y][j] = 1;
             }
-        } else {
+        } else { // vertical
             for (int j = y; j < y + s; j++) {
-                if (boardArray[x][j] != 0) {
+                if (boardArray[j][x] != 0) {
                     return false;
                 }
             }
-            for (int k = y; k < (y + x); k++) {
-                boardArray[x][y] = 1;
+            for (int k = y; k < (y + s); k++) { // doesn't work for (0, 0) when vertical (add s instead of x?)
+                boardArray[k][x] = 1;
             }
         }
         Ship ship = new Ship(s, x, y, dir);

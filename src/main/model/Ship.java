@@ -10,7 +10,7 @@ public class Ship {
     public Ship(int s, int x, int y, int dir) { // test to ensure sqHit+sqRemain always = width
         size = s;
 
-        // this will flatten the arrays?
+        // this will let us access the arrays as if they were side by side
         int linearized = (y * 8) + x;
         coords = new int[s];
 
@@ -24,7 +24,6 @@ public class Ship {
                 coords[i] = linearized + (i * 8);
             }
         }
-
     }
 
     //MODIFIES: this

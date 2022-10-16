@@ -7,25 +7,31 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
     public Board testBoard1 = new Board();
+    public Board testBoard2 = new Board();
 
-    @Test
-    public void boardTest() {
+    @Test // Tests the ships + sunken values through shipsRemaining
+    public void addShipToBoardConstructorTest() {
 
         assertEquals(0, testBoard1.getShipsRemaining());
         testBoard1.addShip(1, 0, 0, 0);
         assertEquals(1, testBoard1.getShipsRemaining());
-
 //        testBoard1.addShip(1, 0, 0, 0);
 //        testBoard1.addShip(1, 0, 0, 0);
 //        testBoard1.addShip(1, 0, 0, 0);
 
     }
 
+    @Test // Tests the ships + sunken values through shipsRemaining
+    public void boardConstructorTest() {
+
+        assertEquals(0, testBoard1.getBoardArray());
+
+    }
     @Test
     public void turnTestGameWon() {
         //create ships then test the t/f
         testBoard1.addShip(1, 0, 0, 0);
-        assertTrue(testBoard1.turn(0, 0));
+        assertTrue(testBoard2.turn(0, 0));
     }
 
     @Test
@@ -38,6 +44,7 @@ public class BoardTest {
     public void addShipTest(){
         testBoard1.addShip(1,0,0,0);
         assertEquals(0,testBoard1.getBoardArray()); // change 0 to the actual 2d array
+        //assertEquals();
     }
 
 }

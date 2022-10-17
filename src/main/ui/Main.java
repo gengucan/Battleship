@@ -21,9 +21,13 @@ public class Main { // create a printBoard for setup with 1's showing to user
                 }
                 System.out.print("\t"); // prints the spacing
             }
-
-/*
-            ACTIVATE THIS LOOP FOR TESTING PURPOSES ONLY! - it shows where the ships are
+            System.out.println(); // creates new line after every 8 prints (to create an 8x8 board)
+        }
+        System.out.println("You have " + shipsRemaining + " ships left to find");
+        System.out.println();
+    }
+    /*
+            ACTIVATE THIS LOOP IN FN ABOVE FOR TESTING PURPOSES ONLY! - it shows where the ships are
             for (int j = 0; j < 8; j++) {
                 if ((boardArray[i][j] == 0)) {
                     System.out.print("?"); // this prints to board -> do we need ln?
@@ -37,11 +41,6 @@ public class Main { // create a printBoard for setup with 1's showing to user
                 System.out.print("\t"); // prints the spacing
             }
 */
-            System.out.println(); // creates new line after every 8 prints (to create an 8x8 board)
-        }
-        System.out.println("You have " + shipsRemaining + " ships left to find");
-        System.out.println();
-    }
 
     //EFFECTS: Prompts player 1 for their inputs and checks if they have won or not
     private static boolean runTurn1(Game g, UserInput u) {
@@ -110,10 +109,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
     //EFFECTS: Sets up each ship for each player and runs the game until a winner is found
     public static void main(String[] args) {
         Game game1 = new Game();
-
         UserInput userInput = new UserInput();
-
-        // Start up
         startUp();
 
         shipSetup(1);

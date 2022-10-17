@@ -24,14 +24,22 @@ public class BoardTest {
         assertEquals(0, testBoard1.getShipsRemaining()); // no ships remain (no ships were set)
     }
 
-    @Test
+    @Test // Test for p1 win
     public void turnTestGameWon() {
         testBoard1.addShip(1, 0, 0, 0);
         testBoard2.addShip(1,0,0,0);
         assertTrue(testBoard2.turn(0, 0));
     }
 
-    @Test
+    @Test // Test for p2 win
+    public void turnTestGameWonP2() {
+        testBoard1.addShip(1, 0, 0, 0);
+        testBoard2.addShip(1,0,0,0);
+        assertFalse(testBoard1.turn(4, 4));
+        assertTrue(testBoard2.turn(0,0));
+    }
+
+    @Test // Test for continuing past the first turn (full loop)
     public void turnTestGameCont(){
         testBoard1.addShip(1, 0, 0, 0);
         testBoard2.addShip(1,0,0,0);
@@ -39,11 +47,37 @@ public class BoardTest {
         assertEquals("1, 1", testBoard1.checkForSingleMiss());
     }
 
-    @Test // testing to ensure the game board puts a ship in the correct spot in both arrays
+    @Test // Test for sinking one ship and having the game not end
+    public void turnTestSinkOne() {
+        testBoard1.addShip(1, 0, 0, 0);
+        testBoard1.addShip(1, 7,7,0);
+        testBoard2.addShip(1,0,0,0);
+        assertEquals(2, testBoard1.getShipsRemaining());
+        assertFalse(testBoard1.turn(0,0));
+        assertEquals(1, testBoard1.getShipsRemaining());
+    }
+
+    @Test // Testing to ensure the game board puts a ship in the correct spot in both arrays
     public void addShipTest(){
         testBoard1.addShip(1,0,0,0);
         assertEquals(1, testBoard1.getShipsRemaining()); // test for ships array
         assertEquals("0, 0", testBoard1.checkForSingleShip()); // test for board array
     }
 
+    @Test // Test for ship hit but not sunk
+    public void hitButNotSunkTest() {
+        testBoard1.addShip(2, 0,0, 1);
+        testBoard2.addShip(1, 0,0,1);
+        assertEquals(1, testBoard1.getShipsRemaining());
+        assertEquals(1, testBoard2.getShipsRemaining());
+        assertFalse(testBoard1.turn(0,0));
+        assertEquals(1, testBoard1.getShipsRemaining());
+        assertEquals(1, testBoard2.getShipsRemaining());
+        assertFalse(testBoard2.turn(4,3));
+        assertEquals(1, testBoard1.getShipsRemaining());
+        assertEquals(1, testBoard2.getShipsRemaining());
+        assertTrue(testBoard1.turn(1,0));
+        assertEquals(0, testBoard1.getShipsRemaining());
+        assertEquals(1, testBoard2.getShipsRemaining());
+    }
 }

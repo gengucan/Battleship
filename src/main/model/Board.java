@@ -98,6 +98,7 @@ public class Board {
     }
 
     //TESTING ONLY BELOW!!!
+
     //EFFECTS: returns the coordinates of the first ship encountered
     public String checkForSingleShip() { // need to make this work better
         for (int i = 0; i < 8; i++) {

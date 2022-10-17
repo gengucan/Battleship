@@ -6,6 +6,9 @@ public class Ship {
     private int[] coords;
     private int hits;
 
+    //REQUIRES: s is nonzero, but less than 9
+    //          x and y are between 0 and 7 inclusively
+    //          dir is either 1 or 0
     //MODIFIES: this
     //EFFECTS: create Ship with width w at coordinates x (main coordinate)
     public Ship(int s, int x, int y, int dir) { // test to ensure sqHit+sqRemain always = width
@@ -27,6 +30,7 @@ public class Ship {
         }
     }
 
+    //REQUIRES: x and y are between 0 and 7 inclusively
     //MODIFIES: this
     //EFFECTS: Checks to see if a ship is hit
     public boolean isHit(int x, int y) {

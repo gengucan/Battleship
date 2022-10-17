@@ -6,7 +6,7 @@ import model.Game;
 //Represents the main functionality of the game, including the flow of the game and requesting user inputs
 public class Main { // create a printBoard for setup with 1's showing to user
 
-    //EFFECTS: Prints the ships remaining + the 2D array to the console using the following mapping:
+    //EFFECTS: Prints the number of ships remaining + the 2D array to the console using the following mapping:
     // ? = Has not been checked by player
     // x = Checked by player, missed
     // ! = Checked by player, hit
@@ -43,6 +43,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
             }
 */
 
+    //MODIFIES: board
     //EFFECTS: Prompts player 1 for their inputs and checks if they have won or not
     private static boolean runTurn1(Game g, UserInput u) {
         // Player 1 Turn
@@ -66,6 +67,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
         return false;
     }
 
+    //MODIFIES: board
     //EFFECTS: Prompts player 2 for their inputs and checks if they have won or not
     private static boolean runTurn2(Game g, UserInput u) {
         //Player 2 Turn

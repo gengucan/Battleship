@@ -26,6 +26,7 @@ public class Board {
         }
     }
 
+    //REQUIRES: x and y are between 0 and 7 inclusively
     //MODIFIES: this
     //EFFECTS: Checks the scouted tile and changes it depending on if it was hit or missed;
     //         Returns true if all ships are sunk
@@ -58,7 +59,7 @@ public class Board {
         return false;
     }
 
-    //REQUIRES: dir is either 0 or 1; s is non-zero
+    //REQUIRES: dir is either 0 or 1; s is non-zero, x and y are between 0 and 7 inclusively
     //MODIFIES: this
     //EFFECTS: Adds a ship of the given size, x coord, y coord, and direction to the 2D array and the ships array
     // Note that the x and y are flipped in terms of the 2D array

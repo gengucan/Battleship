@@ -1,5 +1,6 @@
 package ui;
 
+import model.Board;
 import model.Game;
 
 //Represents the main functionality of the game, including the flow of the game and requesting user inputs
@@ -113,60 +114,42 @@ public class Main { // create a printBoard for setup with 1's showing to user
         startUp();
 
         shipSetup(1);
-
-        int shipCount = userInput.userInputShipCount();
-        int counter = 0;
-        while (counter < shipCount) {
-            System.out.println("How big do you want the ship to be?");
-            int size = userInput.userInputSize();
-
-            System.out.println("Which direction do you want this ship facing? '0' = Vertical and '1' = Horizontal");
-            int dir = userInput.userInputDir();
-
-            System.out.println("What X coordinate do you want this to be on?");
-            int x = userInput.userInputCoord();
-
-            System.out.println("What Y coordinate do you want this to be on?");
-            int y = userInput.userInputCoord();
-
-            if (game1.getBoard1().addShip(size, x, y, dir)) {
-                counter++;
-                System.out.println("Ship was added successfully");
-            } else {
-                System.out.println("You are overlapping ships try again");
-            }
-        }
+        takeUserInput(game1, userInput, game1.getBoard1());
 
         shipSetup(2);
-
-        shipCount = userInput.userInputShipCount();
-        counter = 0;
-
-        while (counter < shipCount) {
-            System.out.println("How big do you want the ship to be?");
-            int size = userInput.userInputSize();
-
-            System.out.println("Which direction do you want this ship facing? '0' = Vertical and '1' = Horizontal");
-            int dir = userInput.userInputDir();
-
-            System.out.println("What X coordinate do you want this to be on?");
-            int x = userInput.userInputCoord();
-
-            System.out.println("What Y coordinate do you want this to be on?");
-            int y = userInput.userInputCoord();
-
-            if (game1.getBoard2().addShip(size, x, y, dir)) {
-                counter++;
-                System.out.println("Ship was added successfully");
-            } else {
-                System.out.println("You are overlapping ships try again");
-            }
-        }
+        takeUserInput(game1, userInput, game1.getBoard2());
 
         // Runs the game in order
         while (true) {
             if (runTurn1(game1, userInput) || runTurn2(game1, userInput)) {
                 break;
+            }
+        }
+    }
+
+    //MODIFIES: board
+    //EFFECTS: prompts the user for their desired ship and adds the ship if its valid
+    public static void takeUserInput(Game g, UserInput u, Board b) {
+        int shipCount = u.userInputShipCount();
+        int counter = 0;
+        while (counter < shipCount) {
+            System.out.println("How big do you want the ship to be?");
+            int size = u.userInputSize();
+
+            System.out.println("Which direction do you want this ship facing? '0' = Vertical and '1' = Horizontal");
+            int dir = u.userInputDir();
+
+            System.out.println("What X coordinate do you want this to be on?");
+            int x = u.userInputCoord();
+
+            System.out.println("What Y coordinate do you want this to be on?");
+            int y = u.userInputCoord();
+
+            if (b.addShip(size, x, y, dir)) {
+                counter++;
+                System.out.println("Ship was added successfully");
+            } else {
+                System.out.println("You are overlapping ships try again");
             }
         }
     }

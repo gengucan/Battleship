@@ -2,7 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-
+//Represents the info from an individual board: the 2D array that represents the board, an array that contains the ships
+// on the board and the amount of ships that have been sunk
 public class Board {
     // 2D array to represent the board
     private int[][] boardArray;
@@ -77,7 +78,7 @@ public class Board {
                     return false;
                 }
             }
-            for (int k = y; k < (y + s); k++) { // doesn't work for (0, 0) when vertical (add s instead of x?)
+            for (int k = y; k < (y + s); k++) {
                 boardArray[k][x] = 1;
             }
         }
@@ -96,11 +97,24 @@ public class Board {
         return ships.size() - sunken;
     }
 
-    //TESTING ONLY!!!
-    public String checkForShips() { // need to make this work better
+    //TESTING ONLY BELOW!!!
+    //EFFECTS: returns the coordinates of the first ship encountered
+    public String checkForSingleShip() { // need to make this work better
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (boardArray[i][j] == 1) {
+                    return ("" + i + ", " + j); // need to return some form of i, j
+                }
+            }
+        }
+        return "error";
+    }
+
+    //EFFECTS: returns the coordinates of the first miss square encountered
+    public String checkForSingleMiss() { // need to make this work better
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (boardArray[i][j] == 2) {
                     return ("" + i + ", " + j); // need to return some form of i, j
                 }
             }

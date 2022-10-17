@@ -20,7 +20,6 @@ class ShipTest {
 
         assertTrue(testShip.isHit(0, 0));
         assertFalse(testShip.isSunk());
-
     }
 
     @Test
@@ -29,6 +28,5 @@ class ShipTest {
 
         assertFalse(testShip.isHit(7, 7));
         assertFalse(testShip.isSunk());
-
     }
 }

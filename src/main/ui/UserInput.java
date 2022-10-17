@@ -2,6 +2,7 @@ package ui;
 
 import java.util.Scanner;
 
+//Represents the user inputs and checks the user inputs for consistency with the rules of Battleship
 public class UserInput {
     Scanner user = new Scanner(System.in);
 
@@ -56,7 +57,7 @@ public class UserInput {
             String playerChoiceShipCount = user.nextLine();
             int count = Integer.parseInt(playerChoiceShipCount);
 
-            if (count < 3 && count > 0) {
+            if (count < 4 && count > 0) {
                 return count;
             }
         }

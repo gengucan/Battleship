@@ -1,5 +1,6 @@
 package model;
 
+//Represents a ship with size and coordinates (x, y) that correspond to the board
 public class Ship {
     private int size;
     private int[] coords;

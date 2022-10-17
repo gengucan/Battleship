@@ -2,6 +2,7 @@ package ui;
 
 import model.Game;
 
+//Represents the main functionality of the game, including the flow of the game and requesting user inputs
 public class Main { // create a printBoard for setup with 1's showing to user
 
     //EFFECTS: Prints the ships remaining + the 2D array to the console using the following mapping:
@@ -94,6 +95,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
         System.out.println("Please only input integers like '1' and '3' anywhere where input is required.");
         System.out.println("The size of the board is 8x8, and the square are accessed by using zero-based indexing.");
         System.out.println("Therefore, all inputs should be between 0-7.");
+        System.out.println("Additionally, if you input an invalid number you will be given a new line to try again");
         System.out.println("GLHF!");
         System.out.println();
     }
@@ -165,6 +167,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
             }
         }
 
+        // Runs the game in order
         while (true) {
             if (runTurn1(game1, userInput) || runTurn2(game1, userInput)) {
                 break;

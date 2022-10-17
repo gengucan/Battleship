@@ -1,5 +1,6 @@
 package model;
 
+//Represents the game with two boards, one for each player
 public class Game {
     Board board1;
     Board board2;
@@ -10,7 +11,7 @@ public class Game {
         board2 = new Board();
     }
 
-    // Returns board1
+    //EFFECTS: Returns board1
     public Board getBoard1() {
         return board1;
     }

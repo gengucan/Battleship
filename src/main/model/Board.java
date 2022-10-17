@@ -18,8 +18,8 @@ public class Board {
         ships = new ArrayList<>(1);
 
         // Set all values to 0 (unchecked)
-        for (int i = 0; i < 0; i++) {
-            for (int j = 0; j < 0; j++) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 boardArray[i][j] = 0;
             }
         }
@@ -60,6 +60,7 @@ public class Board {
     //REQUIRES: dir is either 0 or 1; s is non-zero
     //MODIFIES: this
     //EFFECTS: Adds a ship of the given size, x coord, y coord, and direction to the 2D array and the ships array
+    // Note that the x and y are flipped in terms of the 2D array
     public boolean addShip(int s, int x, int y, int dir) {
         if (dir == 1) { // horizontal
             for (int i = x; i < x + s; i++) {
@@ -85,12 +86,26 @@ public class Board {
         return true;
     }
 
+    //EFFECTS: Returns private variable boardArray
     public int[][] getBoardArray() {
         return boardArray;
     }
 
+    //EFFECTS: Returns the number of ships remaining
     public int getShipsRemaining() {
         return ships.size() - sunken;
+    }
+
+    //TESTING ONLY!!!
+    public String checkForShips() { // need to make this work better
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (boardArray[i][j] == 1) {
+                    return ("" + i + ", " + j); // need to return some form of i, j
+                }
+            }
+        }
+        return "error";
     }
 }
 

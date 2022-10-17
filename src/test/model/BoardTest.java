@@ -9,49 +9,41 @@ public class BoardTest {
     public Board testBoard1 = new Board();
     public Board testBoard2 = new Board();
 
-    @Test // Tests the ships + sunken values through shipsRemaining
+    @Test // Tests adding and ships and repeated ships
     public void addShipToBoardConstructorTest() {
-
         assertEquals(0, testBoard1.getShipsRemaining());
         testBoard1.addShip(1, 0, 0, 0);
         assertEquals(1, testBoard1.getShipsRemaining());
-//        testBoard1.addShip(1, 0, 0, 0);
-//        testBoard1.addShip(1, 0, 0, 0);
-//        testBoard1.addShip(1, 0, 0, 0);
-
+        testBoard1.addShip(1, 0, 0, 0);
+        assertEquals(1, testBoard1.getShipsRemaining());
     }
 
     @Test // Tests the ships + sunken values through shipsRemaining
     public void boardConstructorTest() {
-
-        assertEquals(0, testBoard1.getBoardArray());
-
+        assertEquals("error", testBoard1.checkForShips()); // only zeros, no ships in 2d array
+        assertEquals(0, testBoard1.getShipsRemaining()); // no ships remain (no ships were set)
     }
+
     @Test
     public void turnTestGameWon() {
         //create ships then test the t/f
         testBoard1.addShip(1, 0, 0, 0);
+        testBoard2.addShip(1,0,0,0);
         assertTrue(testBoard2.turn(0, 0));
     }
 
     @Test
     public void turnTestGameCont(){
         testBoard1.addShip(1, 0, 0, 0);
+        testBoard2.addShip(1,0,0,0);
         assertFalse(testBoard1.turn(1,1));
     }
 
-    @Test // testing to ensure the game board puts a ship in the correct spot on the array
+    @Test // testing to ensure the game board puts a ship in the correct spot in both arrays
     public void addShipTest(){
         testBoard1.addShip(1,0,0,0);
-        assertEquals(0,testBoard1.getBoardArray()); // change 0 to the actual 2d array
-        //assertEquals();
+        assertEquals(1, testBoard1.getShipsRemaining()); // test for ships array
+        assertEquals("0, 0", testBoard1.checkForShips()); // test for board array
     }
 
 }
-
-/*
-testBoard.setParsedPlayerChoiceSize(1);
-        testBoard.setParsedPlayerChoiceOri(0);
-        testBoard.setParsedPlayerChoiceX(0);
-        testBoard.setParsedPlayerChoiceY(0);
- */

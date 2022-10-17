@@ -8,13 +8,14 @@ public class Game {
     public Game() {
         board1 = new Board();
         board2 = new Board();
-
     }
 
+    // Returns board1
     public Board getBoard1() {
         return board1;
     }
 
+    //EFFECTS: Returns board2
     public Board getBoard2() {
         return board2;
     }

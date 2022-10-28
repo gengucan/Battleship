@@ -10,6 +10,7 @@ public class UserInput {
     public UserInput() {
     }
 
+
     //EFFECTS: Checks if given coord is within the boundaries
     public int userInputCoord() {
         int coord;
@@ -64,7 +65,7 @@ public class UserInput {
     }
 
     //EFFECTS: Prompts the user to enter input for the given field
-    private int getInput() {
+    public int getInput() {
         String input = user.nextLine();
         return Integer.parseInt(input);
     }

@@ -1,10 +1,14 @@
 package model;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+import persistence.Writable;
+
 import java.util.ArrayList;
 
 //Represents the info from an individual board: the 2D array that represents the board, an array that contains the ships
 // on the board and the amount of ships that have been sunk
-public class Board {
+public class Board implements Writable {
     // 2D array to represent the board
     private int[][] boardArray;
     // Array of ships
@@ -51,6 +55,7 @@ public class Board {
             // Checks if all the ships have been sunk
             if (ships.get(--counter).isSunk()) {
                 sunken++;
+                //ships.remove(counter);
                 if (sunken == ships.size()) {
                     return true;
                 }
@@ -98,14 +103,27 @@ public class Board {
         return ships.size() - sunken;
     }
 
+    //EFFECTS: Returns the ships array
+    public ArrayList<Ship> getShips() {
+        return ships;
+    }
+
+//    public void setSunken(int sunk) {
+//        sunken = sunk;
+//    }
+//
+//    public int getSunken() {
+//        return sunken;
+//    }
+
     //TESTING ONLY BELOW!!!
 
     //EFFECTS: returns the coordinates of the first ship encountered
-    public String checkForSingleShip() { // need to make this work better
+    public String checkForSingleShip() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (boardArray[i][j] == 1) {
-                    return ("" + i + ", " + j); // need to return some form of i, j
+                    return ("" + i + ", " + j);
                 }
             }
         }
@@ -113,15 +131,33 @@ public class Board {
     }
 
     //EFFECTS: returns the coordinates of the first miss square encountered
-    public String checkForSingleMiss() { // need to make this work better
+    public String checkForSingleMiss() {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 if (boardArray[i][j] == 2) {
-                    return ("" + i + ", " + j); // need to return some form of i, j
+                    return ("" + i + ", " + j);
                 }
             }
         }
         return "error";
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("boardArray", boardArray);
+        json.put("ships", shipsToJson());
+        return json;
+    }
+
+    private JSONArray shipsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Ship s: ships) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
     }
 }
 

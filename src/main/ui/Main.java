@@ -2,9 +2,45 @@ package ui;
 
 import model.Board;
 import model.Game;
+import persistence.JsonRead;
+import persistence.JsonWrite;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Scanner;
 
 //Represents the main functionality of the game, including the flow of the game and requesting user inputs
 public class Main { // create a printBoard for setup with 1's showing to user
+
+    private static final String FILE_PATH = "data/game.json";
+    private static JsonWrite jsonWrite = new JsonWrite(FILE_PATH);
+    private static JsonRead jsonRead = new JsonRead(FILE_PATH);
+    private static Game game1;
+
+    private static UserInput userInput = new UserInput();
+
+    //EFFECTS: saves game to file
+    private static void saveGame() {
+        try {
+            jsonWrite.open();
+            jsonWrite.write(game1.getBoard1()); //need to have a board in this to save
+            jsonWrite.write(game1.getBoard2());
+            jsonWrite.close();
+            System.out.println("The game has been saved. You can safely close the app.");
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to save game");
+        }
+    }
+
+    private static void loadGame() { // exception
+        try { // what to do here?
+            game1.setBoard1(jsonRead.read());
+            game1.setBoard2(jsonRead.read());
+        } catch (IOException e) {
+            System.out.println("Unable to load from " + FILE_PATH);
+        }
+    }
+
 
     //EFFECTS: Prints the number of ships remaining + the 2D array to the console using the following mapping:
     // ? = Has not been checked by player
@@ -46,47 +82,71 @@ public class Main { // create a printBoard for setup with 1's showing to user
     //MODIFIES: board
     //EFFECTS: Prompts player 1 for their inputs and checks if they have won or not
     private static boolean runTurn1(Game g, UserInput u) {
+        Scanner scanner = new Scanner(System.in);
+
+
         // Player 1 Turn
         System.out.println("Player 1 turn:");
 
         printBoard(g.getBoard2().getBoardArray(), g.getBoard2().getShipsRemaining());
 
-        System.out.println("What X coordinate do you want to scout?");
-        int x = u.userInputCoord();
+        System.out.println("Would you like to save (type 's') or play type ('p')?");
+        String selection = scanner.nextLine();
 
-        System.out.println("What Y coordinate do you want to scout?");
-        int y = u.userInputCoord();
-
-        if (g.getBoard2().turn(x, y)) {
-            System.out.println("Player 1 wins!");
+        if (selection.equals("s")) {
+            saveGame();
             return true;
-        }
-        System.out.println("Player 1 Scouting Report");
-        printBoard(g.getBoard2().getBoardArray(), g.getBoard2().getShipsRemaining());
+        } else {
 
-        return false;
+            System.out.println("What X coordinate do you want to scout?"); // or type 111 to save
+            int x = u.userInputCoord();
+
+
+            System.out.println("What Y coordinate do you want to scout?");
+            int y = u.userInputCoord();
+
+            if (g.getBoard2().turn(x, y)) {
+                System.out.println("Player 1 wins!");
+                return true;
+            }
+            System.out.println("Player 1 Scouting Report");
+            printBoard(g.getBoard2().getBoardArray(), g.getBoard2().getShipsRemaining());
+
+            return false;
+        }
     }
 
     //MODIFIES: board
     //EFFECTS: Prompts player 2 for their inputs and checks if they have won or not
     private static boolean runTurn2(Game g, UserInput u) {
+        Scanner scanner = new Scanner(System.in);
+
         //Player 2 Turn
         System.out.println("Player 2 turn:");
         printBoard(g.getBoard1().getBoardArray(), g.getBoard1().getShipsRemaining());
 
-        System.out.println("What X coordinate do you want to scout?");
-        int x = u.userInputCoord();
+        System.out.println("Would you like to save (type 's') or play type ('p')?");
+        String selection = scanner.nextLine();
 
-        System.out.println("What Y coordinate do you want to scout?");
-        int y = u.userInputCoord();
-
-        if (g.getBoard1().turn(x, y)) {
-            System.out.println("Player 2 wins!");
+        if (selection.equals("s")) {
+            saveGame();
             return true;
+        } else {
+
+            System.out.println("What X coordinate do you want to scout?");
+            int x = u.userInputCoord();
+
+            System.out.println("What Y coordinate do you want to scout?");
+            int y = u.userInputCoord();
+
+            if (g.getBoard1().turn(x, y)) {
+                System.out.println("Player 2 wins!");
+                return true;
+            }
+            System.out.println("Player 2 Scouting Report:");
+            printBoard(g.getBoard1().getBoardArray(), g.getBoard1().getShipsRemaining());
+            return false;
         }
-        System.out.println("Player 2 Scouting Report:");
-        printBoard(g.getBoard1().getBoardArray(), g.getBoard1().getShipsRemaining());
-        return false;
     }
 
     //EFFECTS: Prints the welcome message and instructions
@@ -100,7 +160,7 @@ public class Main { // create a printBoard for setup with 1's showing to user
         System.out.println("Additionally, if you input an invalid number you will be given a new line to try again");
         System.out.println("GLHF!");
         System.out.println();
-    }
+    } // add option to load here?
 
     //EFFECTS: Prints the setup message for each player's board
     private static void shipSetup(int p) {
@@ -109,17 +169,45 @@ public class Main { // create a printBoard for setup with 1's showing to user
         System.out.println("How many ships would you like between 1-3?");
     }
 
+    private static void select(UserInput ui) {
+        Scanner scanner = new Scanner(System.in);
+
+
+//        System.out.println("Would you like to start a new game (type 'n') or load (type 'l') a previous game?");
+//        String selection = scanner.nextLine();
+
+        while (true) {
+            System.out.println("Would you like to start a new game (type 'n') or load (type 'l') a previous game?");
+            String selection = scanner.nextLine();
+            if (selection.equals("l")) {
+                loadGame();
+                break;
+            } else if (selection.equals("n")) {
+                System.out.println("Starting new game");
+                shipSetup(1);
+                takeUserInput(game1, ui, game1.getBoard1());
+
+                shipSetup(2);
+                takeUserInput(game1, ui, game1.getBoard2());
+                break;
+            } else {
+                System.out.println("Please type either n for a new game or l to load a previous game");
+            }
+        }
+    }
+
     //EFFECTS: Sets up each ship for each player and runs the game until a winner is found
     public static void main(String[] args) {
-        Game game1 = new Game();
-        UserInput userInput = new UserInput();
+        game1 = new Game();
+        //UserInput userInput = new UserInput();
         startUp();
+        select(userInput);
 
-        shipSetup(1);
-        takeUserInput(game1, userInput, game1.getBoard1());
-
-        shipSetup(2);
-        takeUserInput(game1, userInput, game1.getBoard2());
+//        shipSetup(1);
+//        takeUserInput(game1, userInput, game1.getBoard1());
+//
+//        shipSetup(2);
+//        takeUserInput(game1, userInput, game1.getBoard2());
 
         // Runs the game in order
         while (true) {
@@ -155,4 +243,5 @@ public class Main { // create a printBoard for setup with 1's showing to user
             }
         }
     }
+
 }

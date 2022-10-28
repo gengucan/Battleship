@@ -20,4 +20,12 @@ public class Game {
     public Board getBoard2() {
         return board2;
     }
+
+    public void setBoard1(Board b) {
+        board1 = b;
+    }
+
+    public void setBoard2(Board b) {
+        board2 = b;
+    }
 }

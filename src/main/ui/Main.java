@@ -12,9 +12,14 @@ import java.util.Scanner;
 //Represents the main functionality of the game, including the flow of the game and requesting user inputs
 public class Main { // create a printBoard for setup with 1's showing to user
 
-    private static final String FILE_PATH = "data/game.json";
-    private static JsonWrite jsonWrite = new JsonWrite(FILE_PATH);
-    private static JsonRead jsonRead = new JsonRead(FILE_PATH);
+    private static final String FILE_PATH1 = "data/game.json";
+    private static JsonWrite jsonWrite1 = new JsonWrite(FILE_PATH1);
+    private static JsonRead jsonRead1 = new JsonRead(FILE_PATH1);
+
+    private static final String FILE_PATH2 = "data/board2.json";
+    private static JsonWrite jsonWrite2 = new JsonWrite(FILE_PATH2);
+    private static JsonRead jsonRead2 = new JsonRead(FILE_PATH2);
+
     private static Game game1;
 
     private static UserInput userInput = new UserInput();
@@ -22,10 +27,12 @@ public class Main { // create a printBoard for setup with 1's showing to user
     //EFFECTS: saves game to file
     private static void saveGame() {
         try {
-            jsonWrite.open();
-            jsonWrite.write(game1.getBoard1()); //need to have a board in this to save
-            jsonWrite.write(game1.getBoard2());
-            jsonWrite.close();
+            jsonWrite1.open();
+            jsonWrite1.write(game1.getBoard1());
+            jsonWrite2.open();
+            jsonWrite2.write(game1.getBoard2());
+            jsonWrite1.close();
+            jsonWrite2.close();
             System.out.println("The game has been saved. You can safely close the app.");
         } catch (FileNotFoundException e) {
             System.out.println("Unable to save game");
@@ -34,10 +41,10 @@ public class Main { // create a printBoard for setup with 1's showing to user
 
     private static void loadGame() { // exception
         try { // what to do here?
-            game1.setBoard1(jsonRead.read());
-            game1.setBoard2(jsonRead.read());
+            game1.setBoard1(jsonRead1.read());
+            game1.setBoard2(jsonRead2.read());
         } catch (IOException e) {
-            System.out.println("Unable to load from " + FILE_PATH);
+            System.out.println("Unable to load");
         }
     }
 

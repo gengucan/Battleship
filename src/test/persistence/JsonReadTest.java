@@ -39,8 +39,8 @@ public class JsonReadTest {
         try {
             Board b = jsonRead.read();
             b.setSunken(3);
-            assertEquals(1, b.getShips().size());
-            assertEquals(-2, b.getShipsRemaining()); // getShipsRemaining is getShips().size() - sunken
+            assertEquals(2, b.getShips().size());
+            assertEquals(-1, b.getShipsRemaining()); // getShipsRemaining is getShips().size() - sunken
         } catch (IOException e) {
             fail("Could not read file");
         }

@@ -16,19 +16,24 @@ import java.util.stream.Stream;
 
 // Citation: JsonSerializationDemo
 
+// Represents a reader that reads data from JSON file
 public class JsonRead {
     private String file;
 
+    //EFFECTS: Creates a reader to read a file
     public JsonRead(String file) {
         this.file = file;
     }
 
+    //EFFECTS: Reads data from file and returns it
+    //         Throws IOException if an error occurs reading data
     public Board read() throws IOException {
         String jsonData = readFile(file);
         JSONObject jsonObject = new JSONObject(jsonData);
         return parseBoard(jsonObject);
     }
 
+    //EFFECTS: Reads file as a string and returns it
     private String readFile(String file) throws IOException {
         StringBuilder builder = new StringBuilder();
 
@@ -39,6 +44,7 @@ public class JsonRead {
         return builder.toString();
     }
 
+    //EFFECTS: Parses board from jsonobject and returns it
     private Board parseBoard(JSONObject jsonObject) {
         Board b = new Board(); // this is what makes us print a new board rn
         loadShips(b, jsonObject);
@@ -49,6 +55,7 @@ public class JsonRead {
         return b;
     }
 
+    //EFFECTS: Parses ships from jsonobject and adds them to board
     private void loadShips(Board b, JSONObject jsonObject) {
         JSONArray jsonArray = jsonObject.getJSONArray("ships");
         for (Object json: jsonArray) {
@@ -57,6 +64,7 @@ public class JsonRead {
         }
     }
 
+    //EFFECTS: Parses ship from jsonobject and adds them to board
     private void loadShip(Board b, JSONObject jsonObject) {
         int size = jsonObject.getInt("size");
         int coordX = jsonObject.getInt("coordX");

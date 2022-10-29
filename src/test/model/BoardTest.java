@@ -26,8 +26,12 @@ public class BoardTest {
 
     @Test // Test for p1 win
     public void turnTestGameWon() {
+        boolean[] testSet = new boolean[1];
+        testSet[0] = false;
         testBoard1.addShip(1, 0, 0, 0);
         testBoard2.addShip(1,0,0,0);
+        assertFalse(testBoard1.addShip(1,0,0,0,testSet));
+        assertFalse(testBoard1.addShip(1,0,0,1,testSet));
         assertTrue(testBoard2.turn(0, 0));
     }
 
@@ -79,5 +83,12 @@ public class BoardTest {
         assertTrue(testBoard1.turn(1,0));
         assertEquals(0, testBoard1.getShipsRemaining());
         assertEquals(1, testBoard2.getShipsRemaining());
+    }
+
+    @Test
+    public void badShips() {
+        testBoard1.addShip(1,0,0,0);
+        assertFalse(testBoard1.addShip(1,0,0,0));
+        assertFalse(testBoard1.addShip(1,0,0,1));
     }
 }

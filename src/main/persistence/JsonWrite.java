@@ -12,7 +12,7 @@ import java.io.PrintWriter;
 
 public class JsonWrite {
     private PrintWriter writer;
-    private String file; // create two files, one for each?
+    private String file;
 
     public JsonWrite(String file) {
         this.file = file;
@@ -23,16 +23,10 @@ public class JsonWrite {
     }
 
 
-    public void write(Board b) { // need to call this twice (once per board)
-        JSONObject json1 = b.toJson(); // save board array to an array
-        //JSONObject json2 = b.toJson(); //save ships array to another array
-
-        // .toJson() is a fn that translates to JSON including context by overriding at the class level
+    public void write(Board b) {
+        JSONObject json1 = b.toJson();
 
         saveFile(json1.toString(4));
-        //saveFile(json2.toString(4));
-
-        // call this on both boards when save() is called
     }
 
     //EFFECTS: Closes writer

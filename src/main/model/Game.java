@@ -21,10 +21,12 @@ public class Game {
         return board2;
     }
 
+    //EFFECTS: Sets board1 to the value passed in the parameter
     public void setBoard1(Board b) {
         board1 = b;
     }
 
+    //EFFECTS: Sets board2 to the value passed in the parameter
     public void setBoard2(Board b) {
         board2 = b;
     }

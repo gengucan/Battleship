@@ -1,21 +1,9 @@
 {
-    "ships": [
-        {
-            "coordX": 1,
-            "size": 1,
-            "coordY": 1,
-            "dir": 1
-        },
-        {
-            "coordX": 0,
-            "size": 1,
-            "coordY": 0,
-            "dir": 0
-        }
-    ],
+    "ships": [],
+    "sunken": 0,
     "boardArray": [
         [
-            1,
+            0,
             0,
             0,
             0,
@@ -26,7 +14,7 @@
         ],
         [
             0,
-            1,
+            0,
             0,
             0,
             0,

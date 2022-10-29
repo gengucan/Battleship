@@ -21,3 +21,6 @@ Some *possible* additional features:
 - As a user, I want to be able to choose which coordinate to scout
 - As a user, I want to be able to know the result of scouting a coordinate
 - As a user, I want to be able to keep track of how many enemy ships remain
+
+- As a user, I want to be able to save my game
+- As a user, I want to be able to load a previously saved game

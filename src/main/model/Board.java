@@ -93,6 +93,36 @@ public class Board implements Writable {
         return true;
     }
 
+    //REQUIRES: dir is either 0 or 1; s is non-zero, x and y are between 0 and 7 inclusively
+    //MODIFIES: this
+    //EFFECTS: Adds a ship of the given size, x coord, y coord, and direction to the 2D array and the ships array
+    // Note that the x and y are flipped in terms of the 2D array
+    // this version of the method will track which tiles have been hit on the ship
+    public boolean addShip(int s, int x, int y, int dir, boolean[] hits) {
+        if (dir == 1) { // horizontal
+            for (int i = x; i < x + s; i++) {
+                if (boardArray[y][i] != 0) {
+                    return false;
+                }
+            }
+            for (int j = x; j < (x + s); j++) {
+                boardArray[y][j] = 1;
+            }
+        } else { // vertical
+            for (int j = y; j < y + s; j++) {
+                if (boardArray[j][x] != 0) {
+                    return false;
+                }
+            }
+            for (int k = y; k < (y + s); k++) {
+                boardArray[k][x] = 1;
+            }
+        }
+        Ship ship = new Ship(s, x, y, dir, hits);
+        ships.add(ship);
+        return true;
+    }
+
     //EFFECTS: Returns private variable boardArray
     public int[][] getBoardArray() {
         return boardArray;
@@ -108,13 +138,14 @@ public class Board implements Writable {
         return ships;
     }
 
-//    public void setSunken(int sunk) {
-//        sunken = sunk;
-//    }
-//
-//    public int getSunken() {
-//        return sunken;
-//    }
+    public void setBoardArray(int[][] array) {
+        boardArray = array;
+    }
+
+    public void setSunken(int sunk) {
+        sunken = sunk;
+    }
+
 
     //TESTING ONLY BELOW!!!
 
@@ -147,6 +178,7 @@ public class Board implements Writable {
         JSONObject json = new JSONObject();
         json.put("boardArray", boardArray);
         json.put("ships", shipsToJson());
+        json.put("sunken", sunken);
         return json;
     }
 

@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.stream.Stream;
+
 
 // Citation: JsonSerializationDemo
 
@@ -38,8 +40,12 @@ public class JsonRead {
     }
 
     private Board parseBoard(JSONObject jsonObject) {
-        Board b = new Board();
+        Board b = new Board(); // this is what makes us print a new board rn
         loadShips(b, jsonObject);
+        loadBoardArray(b, jsonObject);
+
+        b.setSunken(jsonObject.getInt("sunken"));
+
         return b;
     }
 
@@ -49,20 +55,7 @@ public class JsonRead {
             JSONObject nextShip = (JSONObject) json;
             loadShip(b, nextShip);
         }
-        /* filter dead ships
-        for (Ship s: jsonArray) {
-            if (s.isSunk()) {
-            // search and remove this ship
-            jsonArray.remove(jsonArray.indexOf(s));
-            }
-        }
-         */
     }
-
-    // loadBoardArray()
-    // this needs to keep the values in the 2d array so we dont need to recreate it
-    // alternative is to write and filter ships -> create boardArray from that list (but then you lose the squares
-    //     that have already guessed)
 
     private void loadShip(Board b, JSONObject jsonObject) {
         int size = jsonObject.getInt("size");
@@ -70,7 +63,37 @@ public class JsonRead {
         int coordY = jsonObject.getInt("coordY");
         int dir = jsonObject.getInt("dir");
 
+        JSONArray savedHits = jsonObject.getJSONArray("hitTiles");
+        boolean[] loadHits = new boolean[size];
 
-        b.addShip(size, coordX, coordY, dir);
+        for (int i = 0; i < size; i++) {
+            loadHits[i] = savedHits.getBoolean(i);
+        }
+
+
+        b.addShip(size, coordX, coordY, dir, loadHits);
+
+// for testing!!
+//        for (int i = 0; i < b.getShips().size(); i++) {
+//            System.out.print(b.getShips().get(i).isSunk());
+//        }
+//        System.out.println("");
+    }
+
+
+
+    private void loadBoardArray(Board b, JSONObject jsonObject) {
+        int[][] boardArray = new int[8][8];
+
+        JSONArray savedBoardArray = jsonObject.getJSONArray("boardArray");
+
+        for (int i = 0; i < 8; i++) {
+            JSONArray innerArray = savedBoardArray.getJSONArray(i);
+            for (int j = 0; j < 8; j++) {
+                boardArray[i][j] = innerArray.getInt(j);
+            }
+        }
+        b.setBoardArray(boardArray);
+        //System.out.println(jsonObject.getJSONArray("boardArray"));
     }
 }

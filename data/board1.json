@@ -1,24 +1,15 @@
 {
-    "ships": [
-        {
-            "coordX": 0,
-            "size": 1,
-            "coordY": 0,
-            "hitTiles": [true],
-            "dir": 0
-        },
-        {
-            "coordX": 7,
-            "size": 1,
-            "coordY": 7,
-            "hitTiles": [false],
-            "dir": 1
-        }
-    ],
-    "sunken": 1,
+    "ships": [{
+        "coordX": 0,
+        "size": 1,
+        "coordY": 0,
+        "hitTiles": [false],
+        "dir": 0
+    }],
+    "sunken": 0,
     "boardArray": [
         [
-            3,
+            1,
             0,
             0,
             0,
@@ -80,7 +71,7 @@
         [
             0,
             0,
-            0,
+            2,
             0,
             0,
             0,
@@ -95,7 +86,7 @@
             0,
             0,
             0,
-            1
+            0
         ]
     ]
 }

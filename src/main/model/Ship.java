@@ -94,6 +94,7 @@ public class Ship implements Writable {
         return false;
     }
 
+
     //EFFECTS: Checks to see if the ship has been sunk
     public boolean isSunk() {
         int counter = 0;

@@ -74,6 +74,15 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
 
         menuItem.addActionListener(this);
 
+        setupFrame();
+
+        pack();
+        frame.setVisible(true);
+    }
+
+    //MODIFIES: frame
+    //EFFECTS: Sets up frame (extracted from constructor for checkstyle)
+    private void setupFrame() {
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 0.5;
@@ -97,10 +106,7 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
         gridBagConstraints.gridy = 1;
 
         frame.add(shipsRemainingPanel2, gridBagConstraints);
-
         frame.setSize(1920, 1080);
-        pack();
-        frame.setVisible(true);
     }
 
     //EFFECTS: saves game when the button is pressed on player 1's turn
@@ -154,7 +160,7 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
             input = JOptionPane.showInputDialog("Would you like to like to load game (type 'l')"
                     + "or start a new game (click 'ok')");
             if (input.equals("l")) {
-                loadGame(); // not loading game
+                loadGame();
             } else {
                 takeUserInput(game, userInput, game.getBoard1());
                 takeUserInput(game, userInput, game.getBoard2());

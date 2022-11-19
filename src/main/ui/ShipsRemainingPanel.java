@@ -22,7 +22,7 @@ public class ShipsRemainingPanel extends JPanel {
         add(shipsRemainLbl1);
     }
 
-    //EFFECTS: Updates the text in the shipsRemaingingPanel
+    //EFFECTS: Updates the text in the shipsRemainingPanel
     public void updateShipsRemainingPanel() {
         shipsRemainLbl1.setText(SHIPS_REMAIN_TXT + board.getShipsRemaining());
     }

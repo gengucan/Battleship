@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import model.Board;
 import model.Game;
 
-
+// Represents an individual board + its ships remaining counter
 public class BoardPanel extends JPanel implements ActionListener {
     private JPanel board;
     private JButton[] buttonArray;
@@ -18,7 +18,7 @@ public class BoardPanel extends JPanel implements ActionListener {
     private ShipsRemainingPanel shipsRemainingPanel;
     private boolean myTurn;
 
-
+//EFFECTS: Creates a new boardpanel object
     public BoardPanel(int p, Game g, ShipsRemainingPanel shipsRemaining) {
         game = g;
         player = p;
@@ -51,23 +51,28 @@ public class BoardPanel extends JPanel implements ActionListener {
         board.setVisible(true);
     }
 
+    //EFFECTS: returns JPanel board
     public JPanel getBoard() {
         return board;
     }
 
+    //EFFECTS: sets myTurn boolean to the param
     public void setMyTurn(boolean b) {
         myTurn = b;
     }
 
+    //EFFECTS: returns myTurn bool
     public boolean getMyTurn() {
         return myTurn;
     }
 
+    //EFFECTS: sets enemyBoard to the param
     public void setEnemyBoardPanel(BoardPanel enemy) { // not using this
         enemyBoard = enemy;
     }
 
-    //method to enable correctly
+    //MODIFIES: this
+    //EFFECTS: enables all buttons on chosen board; sets myTurn for self to false and enemy to true
     public void enableCorrect(Board b) {
         int counter = 0;
 
@@ -83,6 +88,7 @@ public class BoardPanel extends JPanel implements ActionListener {
         updateBoard(b);
     }
 
+    //EFFECTS: updates the gui to display the correct image for the state of each coordinate
     private void updateBoard(Board b) {
         int counter = 0;
         int [][] boardArray = b.getBoardArray();
@@ -103,6 +109,7 @@ public class BoardPanel extends JPanel implements ActionListener {
         }
     }
 
+    //EFFECTS: returns the array of buttons
     public JButton[] getButtonArray() {
         return buttonArray;
     }
@@ -114,6 +121,7 @@ public class BoardPanel extends JPanel implements ActionListener {
         }
     }
 
+    //EFFECTS: determines correct player and runs their turn
     @Override
     public void actionPerformed(ActionEvent e) { // this will be called everytime a button is clicked
         JButton clicked = (JButton) e.getSource(); // get the button that was clicked

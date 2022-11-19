@@ -1,8 +1,6 @@
 package persistence;
 
-
 import model.Board;
-import model.Ship;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -10,7 +8,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 
@@ -88,8 +85,7 @@ public class JsonRead {
 //        System.out.println("");
     }
 
-
-
+    //EFFECTS: loads the boardArray to the game
     private void loadBoardArray(Board b, JSONObject jsonObject) {
         int[][] boardArray = new int[8][8];
 

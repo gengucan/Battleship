@@ -1,48 +1,13 @@
 package ui;
 
 import javax.swing.*;
-import java.util.Scanner;
 
 //Represents the user inputs and checks the user inputs for consistency with the rules of Battleship
 public class UserInput {
-    //Scanner user = new Scanner(System.in);
 
     //EFFECTS: Creates a UserInput object that allows us to access the methods in UserInput
     public UserInput() {
     }
-
-
-//    //EFFECTS: Checks if given coord is within the boundaries
-//    public int userInputCoordX() {
-//        int coord;
-//        String input;
-//
-//        while (true) {
-//            input = JOptionPane.showInputDialog("What x coordinate do you want to scout?");
-//
-//            coord = Integer.parseInt(input);
-//
-//            if (coord >= 0 && coord < 8) {
-//                return coord;
-//            }
-//        }
-//    }
-//
-//    //EFFECTS: Checks if given coord is within the boundaries
-//    public int userInputCoordY() {
-//        int coord;
-//        String input;
-//
-//        while (true) {
-//            input = JOptionPane.showInputDialog("What y coordinate do you want to scout?");
-//
-//            coord = Integer.parseInt(input);
-//
-//            if (coord >= 0 && coord < 8) {
-//                return coord;
-//            }
-//        }
-//    }
 
     //EFFECTS: Checks if given coord is within the boundaries
     public int setupCoordX() {
@@ -124,10 +89,4 @@ public class UserInput {
             }
         }
     }
-
-//    //EFFECTS: Prompts the user to enter input for the given field
-//    public int getInput() {
-//        String input = JOptionPane.showInputDialog("");
-//        return Integer.parseInt(input);
-//    }
 }

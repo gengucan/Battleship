@@ -1,7 +1,6 @@
 package persistence;
 
 import model.Board;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;

@@ -138,10 +138,12 @@ public class Board implements Writable {
         return ships;
     }
 
+    //EFFECTS: Sets board array to the param
     public void setBoardArray(int[][] array) {
         boardArray = array;
     }
 
+    //EFFECTS: Sets the value of sunken to the param
     public void setSunken(int sunk) {
         sunken = sunk;
     }
@@ -173,6 +175,7 @@ public class Board implements Writable {
         return "error";
     }
 
+    //EFFECTS: Places key/value pairs into the json file
     @Override
     public JSONObject toJson() {
         JSONObject json = new JSONObject();
@@ -182,6 +185,7 @@ public class Board implements Writable {
         return json;
     }
 
+    //EFFECTS: Translates my code to be compatible with json
     private JSONArray shipsToJson() {
         JSONArray jsonArray = new JSONArray();
 

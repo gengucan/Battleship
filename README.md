@@ -24,3 +24,15 @@ Some *possible* additional features:
 
 - As a user, I want to be able to save my game
 - As a user, I want to be able to load a previously saved game
+
+
+# Instructions for Grader:
+
+- You can generate the first required event related to adding Xs to a Y by selecting "new game", which prompts the 
+player to choose how many ships (X's) they want to add to the board (Y)
+- You can generate the second required event related to adding Xs to a Y after choosing the number of ships to add. You 
+will be prompted with various options for the properties of each individual ship (X) before adding it to the board (Y)
+- You can locate my visual component by playing the game. Each button has a picture that depicts the state of the
+coordinate: water for unchecked, splash for a miss, and explosion for a hit.
+- You can save the state of my application by using the menu option on Player 1's turn only.
+- You can reload the state of my application by typing 'l' in the first alert box.

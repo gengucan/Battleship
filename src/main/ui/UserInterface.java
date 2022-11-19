@@ -5,7 +5,6 @@ import model.Game;
 
 import persistence.JsonRead;
 import persistence.JsonWrite;
-import ui.BoardPanel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+// Represents a graphical user interface which is displayed using Java Swing library
 public class UserInterface extends JFrame implements ActionListener { // ButtonDemoProject from docs.oracle.com
 
     private ArrayList<JButton> buttons = new ArrayList<>(64);
@@ -35,7 +35,6 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
 
     GridBagConstraints gridBagConstraints;
 
-    //Copied from main
     private static final String FILE_PATH1 = "data/board1.json";
     private static JsonWrite jsonWrite1 = new JsonWrite(FILE_PATH1);
     private static JsonRead jsonRead1 = new JsonRead(FILE_PATH1);
@@ -44,8 +43,8 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
     private static JsonWrite jsonWrite2 = new JsonWrite(FILE_PATH2);
     private static JsonRead jsonRead2 = new JsonRead(FILE_PATH2);
 
-
-    public UserInterface() { //took game param out because we need a new game to be called somewhere
+//EFFECTS: Creates a new user interface object
+    public UserInterface() {
         game = new Game();
 
         setup();
@@ -75,8 +74,6 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
 
         menuItem.addActionListener(this);
 
-//        JPanel gui = new JPanel(new GridLayout(1,2, 25, 5));
-
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.weightx = 0.5;
@@ -104,9 +101,9 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
         frame.setSize(1920, 1080);
         pack();
         frame.setVisible(true);
-//        frame.setContentPane(gui);
     }
 
+    //EFFECTS: saves game when the button is pressed on player 1's turn
     @Override
     public void actionPerformed(ActionEvent e) {
         if (boardPanel1.getMyTurn()) {
@@ -132,6 +129,7 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
         }
     }
 
+    //EFFECTS: loads the game
     private static void loadGame() {
         try {
             game.setBoard1(jsonRead1.read());
@@ -143,6 +141,7 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
         }
     }
 
+    //EFFECTS: displays welcome message + creates a new game and prompts user inputs or loads game
     private void setup() {
         String input;
         userInput = new UserInput();
@@ -164,7 +163,7 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
         }
     }
 
-// taken from main
+
     //MODIFIES: board
     //EFFECTS: prompts the user for their desired ship and adds the ship if its valid
     public static void takeUserInput(Game g, UserInput u, Board b) { // does this need a game param?

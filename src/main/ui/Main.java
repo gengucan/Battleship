@@ -1,14 +1,5 @@
 package ui;
 
-import model.Board;
-import model.Game;
-import persistence.JsonRead;
-import persistence.JsonWrite;
-
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.Scanner;
 
 /* Images from:
 https://images.freeimages.com/images/large-previews/27d/water-splash-1637149.jpg
@@ -26,7 +17,7 @@ public class Main {
 
     private static UserInterface userInterface;
 
-    //EFFECTS: Sets up each ship for each player and runs the game until a winner is found
+    //EFFECTS: Sets up a user interface
     public static void main(String[] args) {
         userInterface = new UserInterface();
         userInterface.boardPanel2.disableAll();

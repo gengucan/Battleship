@@ -26,7 +26,7 @@ Some *possible* additional features:
 - As a user, I want to be able to load a previously saved game
 
 
-# Instructions for Grader:
+## Instructions for Grader:
 
 - You can generate the first required event related to adding Xs to a Y by selecting "new game", which prompts the 
 player to choose how many ships (X's) they want to add to the board (Y)
@@ -36,3 +36,21 @@ will be prompted with various options for the properties of each individual ship
 coordinate: water for unchecked, splash for a miss, and explosion for a hit.
 - You can save the state of my application by using the menu option on Player 1's turn only.
 - You can reload the state of my application by typing 'l' in the first alert box.
+
+
+
+## Phase 4: Task 2
+
+Example output:
+
+- Thu Dec 01 18:35:23 PST 2022: New ship added at x = 0 y = 0
+- Thu Dec 01 18:35:30 PST 2022: New ship added at x = 1 y = 1
+- Thu Dec 01 18:35:41 PST 2022: New ship added at x = 0 y = 0
+- Thu Dec 01 18:35:51 PST 2022: A ship has been sunk
+- Thu Dec 01 18:35:56 PST 2022: A ship has been sunk
+
+
+## Phase 4: Task 3
+
+The only refactoring I would consider in terms of class design/hierarchy would be to move the functionality of 
+UserInput into UserInterface as the naming is slightly confusing and the methods in UserInput are for the UI anyways.

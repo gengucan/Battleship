@@ -104,6 +104,7 @@ public class Ship implements Writable {
         }
 
         if (counter == size) {
+            EventLog.getInstance().logEvent(new Event("A ship has been sunk"));
             return true;
         }
 

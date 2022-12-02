@@ -90,6 +90,9 @@ public class Board implements Writable {
         }
         Ship ship = new Ship(s, x, y, dir);
         ships.add(ship);
+
+        EventLog.getInstance().logEvent(new Event("New ship added at x = " + x + " y = " + y));
+
         return true;
     }
 
@@ -120,6 +123,9 @@ public class Board implements Writable {
         }
         Ship ship = new Ship(s, x, y, dir, hits);
         ships.add(ship);
+
+        EventLog.getInstance().logEvent(new Event("New ship added at x = " + x + " y = " + y));
+
         return true;
     }
 
@@ -148,6 +154,26 @@ public class Board implements Writable {
         sunken = sunk;
     }
 
+    //EFFECTS: Places key/value pairs into the json file
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("boardArray", boardArray);
+        json.put("ships", shipsToJson());
+        json.put("sunken", sunken);
+        return json;
+    }
+
+    //EFFECTS: Translates my code to be compatible with json
+    private JSONArray shipsToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Ship s: ships) {
+            jsonArray.put(s.toJson());
+        }
+
+        return jsonArray;
+    }
 
     //TESTING ONLY BELOW!!!
 
@@ -173,27 +199,6 @@ public class Board implements Writable {
             }
         }
         return "error";
-    }
-
-    //EFFECTS: Places key/value pairs into the json file
-    @Override
-    public JSONObject toJson() {
-        JSONObject json = new JSONObject();
-        json.put("boardArray", boardArray);
-        json.put("ships", shipsToJson());
-        json.put("sunken", sunken);
-        return json;
-    }
-
-    //EFFECTS: Translates my code to be compatible with json
-    private JSONArray shipsToJson() {
-        JSONArray jsonArray = new JSONArray();
-
-        for (Ship s: ships) {
-            jsonArray.put(s.toJson());
-        }
-
-        return jsonArray;
     }
 }
 

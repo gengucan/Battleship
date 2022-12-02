@@ -1,6 +1,8 @@
 package ui;
 
 import model.Board;
+import model.Event;
+import model.EventLog;
 import model.Game;
 
 import persistence.JsonRead;
@@ -10,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -88,7 +92,6 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
         gridBagConstraints.weightx = 0.5;
         gridBagConstraints.weighty = 0.1;
 
-
         frame.add(boardPanel1.getBoard(), gridBagConstraints);
 
         gridBagConstraints.gridx = 1;
@@ -107,6 +110,21 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
 
         frame.add(shipsRemainingPanel2, gridBagConstraints);
         frame.setSize(1920, 1080);
+
+        printAfterExit();
+    }
+
+    private void printAfterExit() {
+        //https://www.folkstalk.com/tech/how-can-i-call-a-function-at-time-of-closing-of-jframe-with-solution/
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent event) {
+                for (Event e : EventLog.getInstance()) {
+                    System.out.println(e.getDate() + ": " + e.getDescription());
+                }
+                EventLog.getInstance().clear();
+            }
+        });
     }
 
     //EFFECTS: saves game when the button is pressed on player 1's turn
@@ -118,6 +136,8 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
             JOptionPane.showMessageDialog(null, "You can only save on Player 1's turn");
         }
     }
+
+
 
     //EFFECTS: saves game to file
     private static void saveGame() {
@@ -174,16 +194,14 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
     //EFFECTS: prompts the user for their desired ship and adds the ship if its valid
     public static void takeUserInput(Game g, UserInput u, Board b) { // does this need a game param?
         int shipCount = u.userInputShipCount();
+
         int counter = 0;
         while (counter < shipCount) {
-
             int size = u.userInputSize();
-
             int dir = u.userInputDir();
-
             int x = u.setupCoordX();
-
             int y = u.setupCoordY();
+
 
             if (b.addShip(size, x, y, dir)) {
                 counter++;
@@ -192,5 +210,62 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
                 JOptionPane.showMessageDialog(null,"Invalid ship, try again");
             }
         }
+
     }
 }
+
+/*
+if exception is caught, ask for input again (try catch but with an if??)
+boolean isNum = true;
+        int shipCount = 0;
+        while (isNum) {
+            try {
+                shipCount = u.userInputShipCount();
+                isNum = true;
+            } catch (NumberFormatException e) {
+                isNum = false;
+            }
+        }
+
+            int size = 0;
+            int dir = 0;
+            int x = 0;
+            int y = 0;
+
+            while (isNum) {
+                try {
+                    size = u.userInputSize();
+                    isNum = true;
+                } catch (NumberFormatException e) {
+                    isNum = false;
+                }
+            }
+
+            while (isNum) {
+                try {
+                    dir = u.userInputDir();
+                    isNum = true;
+                } catch (NumberFormatException e) {
+                    isNum = false;
+                }
+            }
+
+            while (isNum) {
+                try {
+                    x = u.setupCoordX();
+                    isNum = true;
+                } catch (NumberFormatException e) {
+                    isNum = false;
+                }
+            }
+
+            while (isNum) {
+                try {
+                    size = u.setupCoordY();
+                    isNum = true;
+                } catch (NumberFormatException e) {
+                    isNum = false;
+                }
+            }
+
+ */

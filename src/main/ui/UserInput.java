@@ -14,13 +14,18 @@ public class UserInput {
         int coord;
         String input;
 
+
         while (true) {
             input = JOptionPane.showInputDialog("What x coordinate do you want this ship on?");
 
-            coord = Integer.parseInt(input);
+            try {
+                coord = Integer.parseInt(input);
 
-            if (coord >= 0 && coord < 8) {
-                return coord;
+                if (coord >= 0 && coord < 8) {
+                    return coord;
+                }
+            } catch (NumberFormatException e) {
+                // do nothing; will redo text prompt
             }
         }
     }
@@ -33,10 +38,14 @@ public class UserInput {
         while (true) {
             input = JOptionPane.showInputDialog("What y coordinate do you want this ship on?");
 
-            coord = Integer.parseInt(input);
+            try {
+                coord = Integer.parseInt(input);
 
-            if (coord >= 0 && coord < 8) {
-                return coord;
+                if (coord >= 0 && coord < 8) {
+                    return coord;
+                }
+            } catch (NumberFormatException e) {
+                // do nothing; will redo text prompt
             }
         }
     }
@@ -49,11 +58,15 @@ public class UserInput {
         while (true) {
             input = JOptionPane.showInputDialog("What size would you like this ship to be?");
 
-            size = Integer.parseInt(input);
+            try {
+                size = Integer.parseInt(input);
 
-            // Checks for valid size
-            if (size > 0 && size < 9) {
-                return size;
+                // Checks for valid size
+                if (size > 0 && size < 9) {
+                    return size;
+                }
+            } catch (NumberFormatException e) {
+                // do nothing; will redo text prompt
             }
         }
     }
@@ -67,11 +80,15 @@ public class UserInput {
             input = JOptionPane.showInputDialog("Which direction do you want this ship facing? '0' = Vertical and"
                     + "'1' = Horizontal");
 
-            dir = Integer.parseInt(input);
+            try {
+                dir = Integer.parseInt(input);
 
-            // Check for valid orientation (0 or 1)
-            if (dir == 0 || dir == 1) {
-                return dir;
+                // Check for valid orientation (0 or 1)
+                if (dir == 0 || dir == 1) {
+                    return dir;
+                }
+            } catch (NumberFormatException e) {
+                // do nothing; will redo text prompt
             }
         }
     }
@@ -80,12 +97,16 @@ public class UserInput {
     public int userInputShipCount() {
         // Can only break the loop once a number between 1 and 3 is entered
         while (true) {
-
             String playerChoiceShipCount = JOptionPane.showInputDialog("How many ships would you like?");
-            int count = Integer.parseInt(playerChoiceShipCount);
 
-            if (count < 4 && count > 0) {
-                return count;
+            try {
+                int count = Integer.parseInt(playerChoiceShipCount);
+
+                if (count < 4 && count > 0) {
+                    return count;
+                }
+            } catch (NumberFormatException e) {
+                // do nothing; will redo text prompt
             }
         }
     }

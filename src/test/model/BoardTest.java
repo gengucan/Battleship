@@ -2,6 +2,10 @@ package model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -90,5 +94,20 @@ public class BoardTest {
         testBoard1.addShip(1,0,0,0);
         assertFalse(testBoard1.addShip(1,0,0,0));
         assertFalse(testBoard1.addShip(1,0,0,1));
+    }
+    @Test
+    public void logTest() {
+        EventLog.getInstance().clear();
+        testBoard1.addShip(1,0,0,0);
+        testBoard1.addShip(1,1,1,0);
+
+        List<String> console = new ArrayList<>();
+
+        for (Event e: EventLog.getInstance()) {
+            console.add(e.getDescription());
+        }
+        assertEquals("Event log cleared.", console.get(0));
+        assertEquals("New ship added at x = 0 y = 0", console.get(1));
+        assertEquals("New ship added at x = 1 y = 1", console.get(2));
     }
 }

@@ -10,10 +10,7 @@ import persistence.JsonWrite;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,6 +79,7 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
 
         pack();
         frame.setVisible(true);
+
     }
 
     //MODIFIES: frame
@@ -110,17 +108,17 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
 
         frame.add(shipsRemainingPanel2, gridBagConstraints);
         frame.setSize(1920, 1080);
-
-        printAfterExit();
+        printOnClose();
     }
 
-    private void printAfterExit() {
-        //https://www.folkstalk.com/tech/how-can-i-call-a-function-at-time-of-closing-of-jframe-with-solution/
+    // Had to read Oracle for WindowListener / WindowAdapter
+    //EFFECTS: Prints the eventlog to the console
+    private void printOnClose() {
         frame.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent event) {
-                for (Event e : EventLog.getInstance()) {
-                    System.out.println(e.getDate() + ": " + e.getDescription());
+                for (Event ev : EventLog.getInstance()) {
+                    System.out.println(ev.getDate() + ": " + ev.getDescription());
                 }
                 EventLog.getInstance().clear();
             }
@@ -214,58 +212,4 @@ public class UserInterface extends JFrame implements ActionListener { // ButtonD
     }
 }
 
-/*
-if exception is caught, ask for input again (try catch but with an if??)
-boolean isNum = true;
-        int shipCount = 0;
-        while (isNum) {
-            try {
-                shipCount = u.userInputShipCount();
-                isNum = true;
-            } catch (NumberFormatException e) {
-                isNum = false;
-            }
-        }
 
-            int size = 0;
-            int dir = 0;
-            int x = 0;
-            int y = 0;
-
-            while (isNum) {
-                try {
-                    size = u.userInputSize();
-                    isNum = true;
-                } catch (NumberFormatException e) {
-                    isNum = false;
-                }
-            }
-
-            while (isNum) {
-                try {
-                    dir = u.userInputDir();
-                    isNum = true;
-                } catch (NumberFormatException e) {
-                    isNum = false;
-                }
-            }
-
-            while (isNum) {
-                try {
-                    x = u.setupCoordX();
-                    isNum = true;
-                } catch (NumberFormatException e) {
-                    isNum = false;
-                }
-            }
-
-            while (isNum) {
-                try {
-                    size = u.setupCoordY();
-                    isNum = true;
-                } catch (NumberFormatException e) {
-                    isNum = false;
-                }
-            }
-
- */

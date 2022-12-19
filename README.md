@@ -15,7 +15,7 @@ Some *possible* additional features:
 - create a new user action that allows a user to select more than one coordinate per turn
 
 
-## User Stories:
+## User Stories: 
 
 - As a user, I want to be able to add a new ship to the game 
 - As a user, I want to be able to choose which coordinate to scout
